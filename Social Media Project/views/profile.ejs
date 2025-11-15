@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  <body class="bg-zinc-900">
+<div class="main w-full min-h-screen p-3">
+  <h2 class="text-white text-3xl pl-5"> Hello , <%=user.name%> 👋</h2> 
+  <img src="/<%=user.profileImage%>" 
+  class=" inline-block w-40 h-40 rounded-full object-cover object-top ring-2 ring-white shadow-sm m-5 mb-2"
+/>
+  <a class="text-zinc-300 " href="/profilePicture">Edit</a> 
+   <div class="w-full h-full bg-zinc-900 text-white">
+   <a href="/createpost"><input class="px-5 ml-5 py-2 rounded-md bg-blue-500 mt-3" value="Create Post +" type="submit" /></a> 
+   <a href="/logout"><input class="px-5 py-2 ml-2 mt-3 rounded-md bg-red-500" value="Logout" type="submit" /></a> 
+    <div class="posts mt-20 pl-5">
+      <h3 class="text-zinc-400 text-xl">Your Posts</h3>
+      <div class="postcontainer mt-5  flex gap-5 flex-wrap">
+        <% user.post.forEach(function(val){%>
+        <div class="post w-1/3 p-3 mb-3 rounded-md border-2 border-zinc-700 bg-zinc-800">
+        <h3 class="text-blue-500 mb-3">@<%=user.name%></h3>
+          <h3 class="text-zinc-400 mb-3"><%=val.imageurl%></h3>
+          <p class="text-sm tracking-tighter  mb-2"><%=val.description%></p>
+          <p class="text-white mt-3 " >likes : <%=val.likes.length%> </p>
+          <div class="btns gap-5 flex">
+            <a class="text-blue-500" href="/like/<%=val._id%>">
+               <%=val.likes.includes(user._id) ? "Unlike" : "Like"%>
+            <a class="text-zinc-400" href="/edit/<%=val._id%>">Edit</a>
+          </div>
+        </div>
+        <%})%>
+      </div>     
+    </div>
+   </div>
+</div>
+
+  </body>
+</html>
